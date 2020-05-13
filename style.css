@@ -1,0 +1,46 @@
+body {
+    text-align:center;
+    background-color: peachpuff;
+}
+h1 {
+    color:darkcyan;
+}
+.form-style-9{
+    max-width: 700px;
+    background: #FAFAFA;
+    padding: 20px;
+    margin: 30px auto;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 6px solid #305A72;
+}
+fieldset{
+}
+legend{
+    font-weight: bold;
+    color: #305A72;
+}
+.greyBackground{
+    background-color:#CCC;
+}
+.noBorder{
+    border:0;
+    background-color:#CCC;
+}
+table {
+    width: 100%;
+}
+th {
+    text-align: center;
+}
+input[type=text] {padding:3px; border:2px solid #9AA5D3;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+input[type=submit] {padding:5px 15px; background:#9AA5D3; border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: medium;
+    }
