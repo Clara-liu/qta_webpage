@@ -8,18 +8,18 @@
 <body>
     <h1>Quantitative Target Approximation Model</h1>
     <div>
-    <form class="form-style-9" id ="user_input" action ="#">
+    <form class="form-style-9" id ="user_input">
         <fieldset>
             <legend>Initial settings</legend>
-            Starting pitch: <input type="text" name="start_pitch" id="start_pitch" placeholder="150.0" size = "4"/>
-            Upper bound: <input type="text" name="upper_bound" id="upper_bound" placeholder="250.0" size = "4"/>
-            Lower bound: <input type="text" name="lower_bound" id="lower_bound" placeholder="150.0" size = "4"/>
+            Starting pitch: <input type="text" name="start_pitch" id="start_pitch" value="150.0" size = "4" required>
+            Upper bound: <input type="text" name="upper_bound" id="upper_bound" value="250.0" size = "4" required>
+            Lower bound: <input type="text" name="lower_bound" id="lower_bound" value="150.0" size = "4" required>
         </fieldset><br>
         <fieldset class = greyBackground >
             <legend align="center">Parameter settings</legend>
-            Tones(H/R/L/F/N) <input type="text" name="tone_sequence" id="tone_sequence" placeholder="HRLF" size = "5"/>
-            Duration(s/n/l) <input type="text" name="duration_sequence" id="duration_sequence" placeholder="nnnn" size = "5"/>
-            Strength(w/n/s) <input type="text" name="lambda_sequence" id="lambda_sequence" placeholder="nnnn" size = "5"/>
+            Tones(H/R/L/F/N) <input type="text" name="tone_sequence" id="tone_sequence" value="HRLF" size = "5" required>
+            Durations(s/n/l) <input type="text" name="duration_sequence" id="duration_sequence" value="nnnn" size = "5" required>
+            Strengths(w/n/s) <input type="text" name="lambda_sequence" id="lambda_sequence" value="nnnn" size = "5" required>
         <fieldset class = noBorder>
             <legend></legend>
             <TABLE>
@@ -32,20 +32,20 @@
                             <td>H</td><td>R</td><td>L</td><td>F</td><td>N</td>
                         </tr>
                         <tr>
-                            <td>Slope</td>
-                            <td><input type="text" name="h_slope" id="h_slope" placeholder="0.0" size = "6"/></td>
-                            <td><input type="text" name="r_slope" id="r_slope" placeholder="300.0" size = "6"/></td>
-                            <td><input type="text" name="l_slope" id="l_slope" placeholder="0.0" size = "6"/></td>
-                            <td><input type="text" name="f_slope" id="f_slope" placeholder="-200.0" size = "6"/></td>
-                            <td><input type="text" name="n_slope" id="n_slope" placeholder="0.0" size = "6"/></td>
+                            <td>Slope</td><!-- values for target/duration/lambda have been set to default-->
+                            <td><input type="text" name="h_slope" id="h_slope" value="0.0" size = "6"></td>
+                            <td><input type="text" name="r_slope" id="r_slope" value="300.0" size = "6"></td>
+                            <td><input type="text" name="l_slope" id="l_slope" value="0.0" size = "6"></td>
+                            <td><input type="text" name="f_slope" id="f_slope" value="-200.0" size = "6"></td>
+                            <td><input type="text" name="n_slope" id="n_slope" value="0.0" size = "6"></td>
                         </tr>
                         <tr>
                             <td>Height</td>
-                            <td><input type="text" name="h_height" id="h_height" placeholder="240.0" size = "6"/></td>
-                            <td><input type="text" name="r_height" id="r_height" placeholder="230.0" size = "6"/></td>
-                            <td><input type="text" name="l_height" id="l_height" placeholder="150.0" size = "6"/></td>
-                            <td><input type="text" name="f_height" id="f_height" placeholder="160.0" size = "6"/></td>
-                            <td><input type="text" name="n_height" id="n_height" placeholder="190.0" size = "6"/></td>
+                            <td><input type="text" name="h_height" id="h_height" value="240.0" size = "6"></td>
+                            <td><input type="text" name="r_height" id="r_height" value="230.0" size = "6"></td>
+                            <td><input type="text" name="l_height" id="l_height" value="150.0" size = "6"></td>
+                            <td><input type="text" name="f_height" id="f_height" value="160.0" size = "6"></td>
+                            <td><input type="text" name="n_height" id="n_height" value="190.0" size = "6"></td>
                         </tr>
                     </TABLE>
                     </td>
@@ -56,9 +56,9 @@
                                 <td>Short(s)</td><td>Normal(n)</td><td>Long(l)</td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="short" id="short" placeholder="0.15" size = "5"/></td>
-                                <td><input type="text" name="normal" id="normal" placeholder="0.20" size = "5"/></td>
-                                <td><input type="text" name="long" id="long" placeholder="0.30" size = "5"/></td>
+                                <td><input type="text" name="short" id="short" value="0.15" size = "5"></td>
+                                <td><input type="text" name="normal" id="normal" value="0.20" size = "5"></td>
+                                <td><input type="text" name="long" id="long" value="0.30" size = "5"></td>
                             </tr>
                         </TABLE>
                         <TABLE>
@@ -67,9 +67,9 @@
                                 <td>Weak(w)</td><td>Neutral(n)</td><td>Strong(s)</td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="weak" id="weak" placeholder="20.0" size = "5"/></td>
-                                <td><input type="text" name="neutral" id="neutral" placeholder="40.0" size = "5"/></td>
-                                <td><input type="text" name="strong" id="strong" placeholder="60.0" size = "5"/></td>
+                                <td><input type="text" name="weak" id="weak" value="20.0" size = "5"></td>
+                                <td><input type="text" name="neutral" id="neutral" value="40.0" size = "5"></td>
+                                <td><input type="text" name="strong" id="strong" value="60.0" size = "5"></td>
                             </tr>
                         </TABLE>
                     </td>
@@ -77,25 +77,10 @@
             </TABLE>
         </fieldset>
         </fieldset><br>
-        <input type="submit" value="Simulate" onclick="getFormData();" />
+        <button type="button" onclick="getFormData()">Simulate</button>
     </form>
     </div>
-    <!-- getting the user input-->
-    <script src="qta_plot.js"></script>
-    <script>
-        function getFormData() {
-            var inputValues = {
-                Height: [],
-                Slope: [],
-                Duration: [],
-                Lambda: [],
-            }
-            var initialSettings = {
-                pitch_start:0,
-                bounds:[]
-            }
-            var tones = document.getElementById("tone_sequence").value;
-        }
-    </script>
 </body>
+<script src="qta_plot.js"></script>
+<script src="get_data.js"></script>
 </html>
