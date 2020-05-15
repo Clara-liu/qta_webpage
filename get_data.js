@@ -8,11 +8,13 @@ function getFormData() {
     };
     var initialSettings = {
         pitch_start:0,
-        bounds:[]
+        bounds:[],
+        order:0
     };
     initialSettings.pitch_start = parseFloat(document.getElementById("start_pitch").value);
     initialSettings.bounds.push(parseFloat(document.getElementById("lower_bound").value));
     initialSettings.bounds.push(parseFloat(document.getElementById("upper_bound").value));
+    initialSettings.order = parseFloat(document.getElementById("order").value);
 
     var tones = document.getElementById("tone_sequence").value;
     var durations = document.getElementById("duration_sequence").value;
@@ -76,10 +78,10 @@ function getFormData() {
                 var lambda = parseFloat(document.getElementById("weak").value);
                 break;
             case "n":
-                var lambda = parseFloat(document.getElementById("normal").value);
+                var lambda = parseFloat(document.getElementById("neutral").value);
                 break;
             case "l":
-                var lambda = parseFloat(document.getElementById("long").value);
+                var lambda = parseFloat(document.getElementById("strong").value);
                 break;
             default:
                 alert("Please input a valid strength specification!");
@@ -89,4 +91,5 @@ function getFormData() {
     }
     console.log(inputValues);
     console.log(initialSettings);
+    qta(inputValues, initialSettings);
 }
