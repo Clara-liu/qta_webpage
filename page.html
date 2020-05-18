@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Quantitative Target Approximation Model</title>
+    <meta name="AUTHOR" content="Zirui-Liu">
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <h1>Quantitative Target Approximation Model</h1>
+    <h1>Quantitative Target Approximation Model</h1>(Prom-on, Xu & Thipakorn 2006)
     <div>
     <form class="form-style-9" id ="user_input">
         <fieldset>
@@ -81,7 +82,52 @@
         <button type="button" onclick="getFormData()">Simulate</button>
     </form>
     </div>
+    <div class="center" id="plot">
+    </div><br>
+    <div class = box>
+        <h3> Instructions: </h3>
+        <p>
+            <i>Press the "Simulate" button to display model-generated F0 curve and the underlying pitch targets.
+        Make changes in any of the editable boxes and then press "Simulate" again to see the effects</i>
+        </p>
+        <h4>Initial settings:</h4>
+        <p>
+            <u>Starting pitch: </u> The starting point for the first syllable in your sequence.<br>
+            <u>Upper bound: </u> The upper limit on your y axis.<br>
+            <u>Lower bound: </u> The lower limit on your y axis.<br>
+            <u>Order: </u> Specify the number of derivative in the system.
+        </p>
+        <h4>Parameter settings (categorical settings):</h4>
+        <p>
+            <u>Tones: </u>Tone specification for each syllable in your sequence.<br>
+            <u>Duration: </u>Duration specification for each syllable in your sequence.<br>
+            <u>Strength: </u>Strength specification for each syllable in your sequence.<br>
+        <h4>Pitch Targets: </h4>
+        <p>
+            Specifications for the target height and slope of tone categories in Hz. Dynamic targets such as R or F
+            have a positive or negative slope respectively. Static targets such as H or L have a slope of 0.
+        </p>
+        <h4>Durations and strengths: </h4>
+        <p>
+            Duration(s) and strength specification for each categories.
+        </p>
+        </p>
+        <h4>Explanation: </h4>
+        <p>
+            <u>Basic assumption: </u>Production of tone and intonation is a process of successively approaching
+            syllabic pitch targets at varying pitch ranges with different levels of strength.<br>
+            <u>Pitch targets: </u>specified by: y = b + a * x, where b is height and a is slope.<br>
+            <u>Duration: </u>Specifies duration of each syllable, which is the temporal domain of a target.<br>
+            <u>Strength: </u>Determines the amount of strength used to approach a target. Greater strength
+            leads to faster target approximation.
+        </p>
+    </div>
+    <footer>
+        <p>@2020 Zirui Liu</p>
+    </footer>
 </body>
 <script src="get_data.js"></script>
 <script src="qta_plot.js"></script>
+<script src="plot.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </html>

@@ -62,6 +62,23 @@ function qta(target_data, initial_data) {
         }
         f0_data.F0.push(f0);
     }
-    console.log(f0_data);
-    return f0_data;
+    // extra data needed for plotting
+    var plot_decor = {
+        Y_range: initial_data.bounds,
+        X_range: [0, total_dur],
+        Syl_mark: [],
+        Duration: my_data.Duration,
+        m: my_data.Slope,
+        b: []
+    };
+    my_data.Duration.reduce(function(a,b,i = 0) { return plot_decor.Syl_mark[i] = a+b; },0);
+    for (i=0;i<my_data.Height.length;i++){
+        if (my_data.Slope[i] == 0){
+            plot_decor.b[i] = my_data.Height[i];
+        }
+        else{
+            plot_decor.b[i] = target_data.Height[i] - plot_decor.Syl_mark[i]*my_data.Slope[i];
+        }
+    }
+    plot(f0_data, plot_decor);
 }

@@ -15,7 +15,10 @@ function getFormData() {
     initialSettings.bounds.push(parseFloat(document.getElementById("lower_bound").value));
     initialSettings.bounds.push(parseFloat(document.getElementById("upper_bound").value));
     initialSettings.order = parseFloat(document.getElementById("order").value);
-
+    if (initialSettings.pitch_start<initialSettings.bounds[0] || initialSettings.pitch_start>initialSettings.bounds[1]){
+        alert("Starting pitch must be within lower and upper bounds!");
+        return;
+    }
     var tones = document.getElementById("tone_sequence").value;
     var durations = document.getElementById("duration_sequence").value;
     var lambdas = document.getElementById("lambda_sequence").value;
@@ -89,7 +92,12 @@ function getFormData() {
         }
         inputValues.Lambda.push(lambda);
     }
-    console.log(inputValues);
-    console.log(initialSettings);
+    // check whether pitch targets are within limit range
+    for (v=0; v<inputValues.Height.length; v++){
+        if (inputValues.Height[v] < initialSettings.bounds[0] || inputValues.Height[v] > initialSettings.bounds[1]){
+            alert("Target heights must be within lower and upper bounds!");
+            return;
+        }
+    }
     qta(inputValues, initialSettings);
 }
