@@ -77,6 +77,5 @@ function plot(df, decor){
         target.y1 = target.x1*decor.m[i] + decor.b[i]
         layout.shapes.push(target);
     }
-    console.log(layout.shapes)
     Plotly.newPlot("plot", [trace],layout);
 }

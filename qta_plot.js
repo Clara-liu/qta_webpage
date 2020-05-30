@@ -17,9 +17,14 @@ function qta(target_data, initial_data) {
     }
     // for now only implementing 3rd order
     // initial coefficients for first syl
-    var c1 = initial_data.pitch_start - my_data.Height[target_idx];
-    var c2 = 0 + c1 * my_data.Lambda[target_idx] - my_data.Slope[target_idx];
-    var c3 = (0 + 2 * c2 * my_data.Lambda[target_idx] - c1*Math.pow(my_data.Lambda[target_idx],2)) / 2;
+    var lam = my_data.Lambda[target_idx];
+    var height = my_data.Height[target_idx];
+    var slope = my_data.Slope[target_idx];
+    var start_pitch = initial_data.pitch_start;
+
+    var c0 = start_pitch - height;
+    var c1 = 0 + c0 * lam - slope;
+    var c2 = (0 + 2 * c1 * lam - c0*Math.pow(lam,2)) / 2;
     // for loop for each sample point to calculate f0_data
     for (i = 0; i < sample_num; i++) {
         var t_s = i * time_step;
@@ -27,37 +32,41 @@ function qta(target_data, initial_data) {
             // calculate derivatives of previous syllable
             t = my_data.Duration[target_idx];
             let f0_pre = f0_data.F0[i - 1];
-            let vel_pre = -(my_data.Lambda[target_idx]) *
-                (c3 * Math.pow(t, 2) + c2 * t + c1) *
-                Math.exp(-my_data.Lambda[target_idx] * t) +
-                (2 * c3 * t + c2) *
-                Math.exp(-my_data.Lambda[target_idx] * t) +
-                my_data.Slope[target_idx];
-            let acc_pre = Math.pow(my_data.Lambda[target_idx], 2) *
-                (c3 * Math.pow(t, 2) + c2 * t + c1) *
-                Math.exp(-my_data.Lambda[target_idx] * t) -
-                2 * my_data.Lambda[target_idx] * (2 * c3 * t + c2) *
-                Math.exp(-my_data.Lambda[target_idx] * t) +
-                2 * c3 * Math.exp(-my_data.Lambda[target_idx] * t);
+            let vel_pre = -(lam) *
+                (c2 * Math.pow(t, 2) + c1 * t + c0) *
+                Math.exp(-lam * t) +
+                (2 * c2 * t + c1) *
+                Math.exp(-lam * t) +
+                slope;
+            let acc_pre = Math.pow(lam, 2) *
+                (c2 * Math.pow(t, 2) + c1 * t + c0) *
+                Math.exp(-lam * t) -
+                2 * lam * (2 * c2 * t + c1) *
+                Math.exp(-lam * t) +
+                2 * c2 * Math.exp(-lam * t);
             // go to the next syllable
             target_pos = target_pos + my_data.Duration[target_idx];
             target_idx++;
             // calculate coefficients for the next target based on derivatives above
-            c1 = f0_pre - my_data.Height[target_idx];
-            c2 = vel_pre + c1*my_data.Lambda[target_idx] - my_data.Slope[target_idx];
-            c3 = (acc_pre + 2*c2*my_data.Lambda[target_idx] - c1*Math.pow(my_data.Lambda[target_idx],2))/2;
+            lam = my_data.Lambda[target_idx];
+            height = my_data.Height[target_idx];
+            slope = my_data.Slope[target_idx];
+
+            c0 = f0_pre - height;
+            c1 = vel_pre + c0*lam - slope;
+            c2 = (acc_pre + 2*c1*lam - c0*Math.pow(lam,2))/2;
         }
         // calculate current f0
         t = t_s - target_pos;
         f0_data.Time.push(t_s);
         switch (initial_data.order) {
             case 2:
-                var f0 = (my_data.Slope[target_idx]*t + my_data.Height[target_idx]) +
-                    (c1 + c2*t)*Math.exp(-my_data.Lambda[target_idx]*t);
+                var f0 = (slope*t + height) +
+                    (c0 + c1*t)*Math.exp(-lam*t);
                 break;
             default:
-                var f0 = (my_data.Slope[target_idx]*t + my_data.Height[target_idx]) +
-            (c1 + c2*t + c3*Math.pow(t,2))*Math.exp(-my_data.Lambda[target_idx]*t);
+                var f0 = (slope*t + height) +
+            (c0 + c1*t + c2*Math.pow(t,2))*Math.exp(-lam*t);
                 break;
         }
         f0_data.F0.push(f0);

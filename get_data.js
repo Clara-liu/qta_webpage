@@ -83,7 +83,7 @@ function getFormData() {
             case "n":
                 var lambda = parseFloat(document.getElementById("neutral").value);
                 break;
-            case "l":
+            case "s":
                 var lambda = parseFloat(document.getElementById("strong").value);
                 break;
             default:
