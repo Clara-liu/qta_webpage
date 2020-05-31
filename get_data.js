@@ -19,6 +19,10 @@ function getFormData() {
         alert("Starting pitch must be within lower and upper bounds!");
         return;
     }
+    if (initialSettings.order > 10){
+        alert("It might take too long to calculate!");
+        return;
+    }
     var tones = document.getElementById("tone_sequence").value;
     var durations = document.getElementById("duration_sequence").value;
     var lambdas = document.getElementById("lambda_sequence").value;
