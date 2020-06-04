@@ -19,7 +19,11 @@ function getFormData() {
         alert("Starting pitch must be within lower and upper bounds!");
         return;
     }
-    if (initialSettings.order > 10){
+    if (initialSettings.order<2){
+        alert("Please input a order greater than 1!")
+        return;
+    }
+    if (initialSettings.order > 15){
         alert("It might take too long to calculate!");
         return;
     }
