@@ -10,7 +10,7 @@ The linear system
 ![image](equations/equation2.png)  
 The coefficients are determined jointly by derivatives of the previous target and the current target parameters.
 ![image](equations/equation3.png)  
-*Note that for k>=2, (N-k)! should be (k-i)!*   
+  
 Below is a example output of the model:  
 
 ![image](example.png)  
