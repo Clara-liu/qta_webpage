@@ -1,8 +1,13 @@
 function qta(target_data, initial_data) {
     // detach from original object/variable
     var my_data = JSON.parse(JSON.stringify(target_data));
-    var time_step = 0.005;
+    var data = checkLength(my_data, initial_data.order);
+    my_data = data.modified_data;
     var target_num = my_data.Height.length;
+    var decor_data = JSON.parse(JSON.stringify(target_data));
+    console.log(my_data);
+    target_num = my_data.Height.length;
+    var time_step = 0.005;
     var total_dur = my_data.Duration.reduce((a, b) => a + b, 0);
     // round to 3rd decimal place
     total_dur = total_dur.toFixed(3);
@@ -15,9 +20,6 @@ function qta(target_data, initial_data) {
         Time: [],
         F0: [],
     };
-    for (a = 0; a<target_num; a++) {
-        my_data.Height[a] = my_data.Height[a] - my_data.Slope[a]*my_data.Duration[a];
-    }
     // for now only implementing 3rd order
     // initial coefficients for first syl
     var lam = my_data.Lambda[target_idx];
@@ -543,18 +545,19 @@ function qta(target_data, initial_data) {
         Y_range: initial_data.bounds,
         X_range: [0, total_dur],
         Syl_mark: [],
-        Duration: my_data.Duration,
-        m: my_data.Slope,
+        Duration: decor_data.Duration,
+        m: decor_data.Slope,
         b: []
     };
-    my_data.Duration.reduce(function(a,b,i = 0) { return plot_decor.Syl_mark[i] = a+b; },0);
-    for (i=0; i<my_data.Height.length; i++){
-        if (my_data.Slope[i] == 0){
-            plot_decor.b[i] = my_data.Height[i];
+    decor_data.Duration.reduce(function(a,b,i = 0) { return plot_decor.Syl_mark[i] = a+b; },0);
+    for (i=0; i<decor_data.Height.length; i++){
+        if (decor_data.Slope[i] == 0){
+            plot_decor.b[i] = decor_data.Height[i];
         }
         else{
-            plot_decor.b[i] = target_data.Height[i] - plot_decor.Syl_mark[i]*my_data.Slope[i];
+            plot_decor.b[i] = decor_data.Height[i] - plot_decor.Syl_mark[i]*decor_data.Slope[i];
         }
     }
+    console.log(decor_data);
     plot(f0_data, plot_decor);
 }

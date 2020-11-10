@@ -88,14 +88,15 @@
         <h3> Instructions: </h3>
         <p>
             <i>Press the "Simulate" button to display model-generated F0 curve and the underlying pitch targets.
-        Make changes in any of the editable boxes and then press "Simulate" again to see the effects</i>
+        Make changes in any of the editable boxes and then press "Simulate" again to see the effects.</i>
+            <i>The plot itself can be downloaded via the camera icon of the floating toolbar in the top right corner.</i>
         </p>
         <h4>Initial settings:</h4>
         <p>
             <u>Starting pitch: </u> The starting point for the first syllable in your sequence.<br>
             <u>Upper bound: </u> The upper limit on your y axis.<br>
             <u>Lower bound: </u> The lower limit on your y axis.<br>
-            <u>Order: </u> Specify the number of derivative in the system.
+            <u>Order: </u> Manipulates the number of derivatives included in the system.
         </p>
         <h4>Parameter settings (categorical settings):</h4>
         <p>
@@ -109,8 +110,13 @@
         </p>
         <h4>Durations and strengths: </h4>
         <p>
-            Duration(s) and strength specification for each categories.
+            Duration(s) and articulatory strength specification for each categories.
         </p>
+        <h4>qTA delay: </h4>
+        <p>
+            When there are syllables longer than 200ms, the delay implementation will kick in. This mean that the
+            syllable will be split into two stages, with a weaker articulatory strength for the first stage. The initial
+            weak articulatory strength will need to be specified in the pop up window.
         </p>
         <h4>Explanation: </h4>
         <p>
@@ -127,6 +133,7 @@
     </footer>
 </body>
 <script src="get_data.js"></script>
+<script src="check_length.js"></script>
 <script src="qta_plot.js"></script>
 <script src="plot.js"></script>
 <script src="https://unpkg.com/mathjs@7.0.1/dist/math.min.js"></script>
