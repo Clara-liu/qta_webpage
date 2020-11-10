@@ -5,7 +5,7 @@ The code can model F0 with any order system but the webpage has limited the numb
 
 If you wish to compute F0 with higher order systems just comment out or delete the condition block on the 26th line in the get_data.js file.
 #### Equation for target approximation [(Xu & Prom-on, 2019)](https://www.frontiersin.org/articles/10.3389/fpsyg.2019.02469/full):
-The system  
+The system  (N denotes the order number)
 
 ![image](equations/equation1.png)  
 *x(t)* is the linear function driven by the syllable's target, where m and b refer to the slope and height of the target.

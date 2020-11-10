@@ -2,11 +2,11 @@ function qta(target_data, initial_data) {
     // detach from original object/variable
     var my_data = JSON.parse(JSON.stringify(target_data));
     var data = checkLength(my_data, initial_data.order);
+    // modify target parameters for long syllables and target height for dynamic targets
     my_data = data.modified_data;
     var target_num = my_data.Height.length;
+    // unmodified data for plotting purposes
     var decor_data = JSON.parse(JSON.stringify(target_data));
-    console.log(my_data);
-    target_num = my_data.Height.length;
     var time_step = 0.005;
     var total_dur = my_data.Duration.reduce((a, b) => a + b, 0);
     // round to 3rd decimal place
@@ -558,6 +558,5 @@ function qta(target_data, initial_data) {
             plot_decor.b[i] = decor_data.Height[i] - plot_decor.Syl_mark[i]*decor_data.Slope[i];
         }
     }
-    console.log(decor_data);
     plot(f0_data, plot_decor);
 }
