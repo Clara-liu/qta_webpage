@@ -77,5 +77,24 @@ function plot(df, decor){
         target.y1 = target.x1*decor.m[i] + decor.b[i]
         layout.shapes.push(target);
     }
-    Plotly.newPlot("plot", [trace],layout);
+    if ('Weak_mark' in decor){
+        for (i=0; i<decor.Weak_mark.length;i++){
+            let rect = {
+                type:"rect",
+                xref: "x",
+                yref: "y",
+                x0: decor.Weak_mark[i][0],
+                y0: decor.Y_range[0],
+                x1:decor.Weak_mark[i][1],
+                y1: decor.Y_range[1],
+                fillcolor: "#d3d3d3",
+                opacity: 0.25,
+                line:{
+                    width:0
+                }
+            }
+            layout.shapes.push(rect);
+        }
+    }
+    Plotly.newPlot("plot", [trace], layout);
 }

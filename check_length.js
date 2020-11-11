@@ -11,7 +11,6 @@ function checkLength(original_data, order){
     }
     // resetting parameters due to splitting
     if (long_idx.length>0) {
-        // might come in handy later
         var modify = true;
         // default initial lambda by order
         if (order == 3){
@@ -27,6 +26,10 @@ function checkLength(original_data, order){
         var split_ratio = 0.5;
         // modify lambda and duration
         // also modify target heights for splitting dynamic targets
+        // initiate modification bool array
+        modified_data.Weak = new Array(modified_data.Height.length);
+        for (i = 0; i<modified_data.Weak.length; i++){modified_data.Weak[i] = false;}
+
         for (s = long_idx.length - 1; s >= 0; s--) {
             // insert initial slope target (same as second stage target)
             modified_data.Slope.splice(long_idx[s], 0, modified_data.Slope[long_idx[s]]);
@@ -48,6 +51,8 @@ function checkLength(original_data, order){
             modified_data.Duration.splice(long_idx[s], 0, initial_dur);
             // insert initial lambda
             modified_data.Lambda.splice(long_idx[s], 0, weak_lambda);
+            // insert modification inidication
+            modified_data.Weak.splice(long_idx[s], 0, true)
         }
     }
     else{

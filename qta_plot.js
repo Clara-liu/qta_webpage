@@ -558,5 +558,18 @@ function qta(target_data, initial_data) {
             plot_decor.b[i] = decor_data.Height[i] - plot_decor.Syl_mark[i]*decor_data.Slope[i];
         }
     }
+    // add weak stage time stamps to plot_decor
+    if (data.modify){
+        plot_decor.Weak_mark = [];
+        let stage_cumsum = [];
+        my_data.Duration.reduce(function(a, b, i){return stage_cumsum[i] = a+b;},0);
+        stage_cumsum.splice(0, 0, 0);
+        for (i=0; i<my_data.Duration.length; i++){
+            if (my_data.Weak[i]){
+                let mark = [stage_cumsum[i],stage_cumsum[i+1]];
+                plot_decor.Weak_mark.push(mark);
+            }
+        }
+    }
     plot(f0_data, plot_decor);
 }
