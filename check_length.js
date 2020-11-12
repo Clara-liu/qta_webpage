@@ -12,20 +12,18 @@ function checkLength(original_data, order){
     // resetting parameters due to splitting
     if (long_idx.length>0) {
         var modify = true;
+        // show setting window for delay
+        document.getElementById('delay_input').style.display = "block";
         // default initial lambda by order
-        if (order == 3){
-            var default_lambda = 20;
+        // get delay settings
+        var later_dur = parseFloat(document.getElementById("second_duration").value);
+        var default_lambda = document.getElementById("weak_lambda").value;
+        // check delay input
+        if (isNaN(later_dur) || (default_lambda!= 'default'&&isNaN(parseFloat(default_lambda)))) {
+            alert("Please input valid delay settings");
+            return;
         }
-        else{
-            var default_lambda = 6.5*order;
-        }
-        // get week lambda value
-        var weak_lambda = prompt("Please specify the initial lambda for the syllables over 200ms:", default_lambda.toString());
-        weak_lambda = parseFloat(weak_lambda);
-        // defining splitting ratio
-        var split_ratio = 0.5;
-        // modify lambda and duration
-        // also modify target heights for splitting dynamic targets
+            // modify lambda and duration, also modify target heights for splitting dynamic targets
         // initiate modification bool array
         modified_data.Weak = new Array(modified_data.Height.length);
         for (i = 0; i<modified_data.Weak.length; i++){modified_data.Weak[i] = false;}
@@ -33,16 +31,26 @@ function checkLength(original_data, order){
         for (s = long_idx.length - 1; s >= 0; s--) {
             // insert initial slope target (same as second stage target)
             modified_data.Slope.splice(long_idx[s], 0, modified_data.Slope[long_idx[s]]);
-            // calculate second stage duration
-            let later_dur = (modified_data.Duration[long_idx[s]]*(1-split_ratio));
+            // calculate initial stage duration
+            let initial_dur = modified_data.Duration[long_idx[s]]-later_dur;
+            if (initial_dur<=0){
+                alert("Second stage duration cannot be longer than original duration");
+                return;
+            }
             // modify second stage duration
             modified_data.Duration[long_idx[s]] = later_dur;
-            // calculate initial stage duration
-            let initial_dur = (modified_data.Duration[long_idx[s]]/(1-split_ratio))*split_ratio;
             // calculate entire syllable duration
             let original_dur = later_dur+initial_dur;
             // record original target height
             let original_height = modified_data.Height[long_idx[s]]
+            // calculate default weak lambda
+            if (default_lambda == 'default'){
+                var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(later_dur/original_dur, 0.3);
+            }
+            else{
+                var weak_lambda = parseFloat(default_lambda);
+            }
+            modified_data.Weak_lambda = weak_lambda;
             // calculate and modify second stage target height based on second duration
             modified_data.Height[long_idx[s]] = original_height - (modified_data.Slope[long_idx[s]]*later_dur);
             // calculate and insert initial stage height based on original duration

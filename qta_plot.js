@@ -570,6 +570,8 @@ function qta(target_data, initial_data) {
                 plot_decor.Weak_mark.push(mark);
             }
         }
+        plot_decor.Weak_lambda = parseFloat(my_data.Weak_lambda.toFixed(2)).toString();
+        console.log(plot_decor);
     }
     plot(f0_data, plot_decor);
 }

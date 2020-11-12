@@ -95,6 +95,14 @@ function plot(df, decor){
             }
             layout.shapes.push(rect);
         }
+        layout.annotations = [{
+            x: decor.Syl_mark[decor.Syl_mark.length-2],
+            y: decor.Y_range-30,
+            xref: 'x',
+            yref: 'y',
+            text: 'Weak lambda: '.concat(decor.Weak_lambda),
+            showarrow: false
+        }]
     }
     Plotly.newPlot("plot", [trace], layout);
 }
