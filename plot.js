@@ -95,12 +95,13 @@ function plot(df, decor){
             }
             layout.shapes.push(rect);
         }
+        var weak_value = 'Weak lambda: '.concat(decor.Weak_lambda);
         layout.annotations = [{
             x: decor.Syl_mark[decor.Syl_mark.length-2],
-            y: decor.Y_range-30,
+            y: decor.Y_range+1,
             xref: 'x',
             yref: 'y',
-            text: 'Weak lambda: '.concat(decor.Weak_lambda),
+            text: weak_value,
             showarrow: false
         }]
     }

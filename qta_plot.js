@@ -20,7 +20,6 @@ function qta(target_data, initial_data) {
         Time: [],
         F0: [],
     };
-    // for now only implementing 3rd order
     // initial coefficients for first syl
     var lam = my_data.Lambda[target_idx];
     var height = my_data.Height[target_idx];
@@ -571,7 +570,6 @@ function qta(target_data, initial_data) {
             }
         }
         plot_decor.Weak_lambda = parseFloat(my_data.Weak_lambda.toFixed(2)).toString();
-        console.log(plot_decor);
     }
     plot(f0_data, plot_decor);
 }

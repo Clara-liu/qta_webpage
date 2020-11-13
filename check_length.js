@@ -45,7 +45,13 @@ function checkLength(original_data, order){
             let original_height = modified_data.Height[long_idx[s]]
             // calculate default weak lambda
             if (default_lambda == 'default'){
-                var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(later_dur/original_dur, 0.3);
+                let later_dur_ratio = later_dur/original_dur;
+                if (later_dur_ratio>=0.7){
+                    var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(1-later_dur_ratio,2);
+                }
+                else{
+                    var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(later_dur_ratio,0.3)
+                }
             }
             else{
                 var weak_lambda = parseFloat(default_lambda);
