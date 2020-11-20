@@ -487,11 +487,10 @@ function qta(target_data, initial_data) {
             target_pos = target_pos.toFixed(3);
             target_pos = parseFloat(target_pos);
             target_idx++;
-            // calculate coefficients for the next target based on derivatives above
             lam = my_data.Lambda[target_idx];
             height = my_data.Height[target_idx];
             slope = my_data.Slope[target_idx];
-
+            // calculate coefficients for the next target based on derivatives above
             c0 = f0_pre - height;
             if (order>15) {
                 c1 = di[1].evaluate({t: t}) + c0 * lam - slope;
@@ -519,7 +518,6 @@ function qta(target_data, initial_data) {
                 }
             }
         }
-        // calculate current f0
         t = t_s - target_pos;
         t = t.toFixed(3);
         t = parseFloat(t);

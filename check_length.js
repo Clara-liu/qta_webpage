@@ -2,7 +2,8 @@ function checkLength(original_data, order){
     // get the indexes of the long syllables
     var modified_data = JSON.parse(JSON.stringify(original_data));
     var len_threshold = 0.2;
-    var long_idx = modified_data.Duration.reduce(function(a, v, i){if (v>len_threshold) a.push(i); return a;},[]);
+    var trigger_threshold = 0.3;
+    var long_idx = modified_data.Duration.reduce(function(a, v, i){if (v>(len_threshold+len_threshold*trigger_threshold)) a.push(i); return a;},[]);
     // adjust heights for dynamic targets (not the ones need splitting)
     for (a = 0; a<modified_data.Height.length; a++) {
         if (!(long_idx.includes(a))){
@@ -34,7 +35,7 @@ function checkLength(original_data, order){
             // calculate initial stage duration
             let initial_dur = modified_data.Duration[long_idx[s]]-later_dur;
             if (initial_dur<=0){
-                alert("Second stage duration cannot be longer than original duration");
+                alert("Second stage duration should be shorter than original duration");
                 return;
             }
             // modify second stage duration
@@ -45,13 +46,7 @@ function checkLength(original_data, order){
             let original_height = modified_data.Height[long_idx[s]]
             // calculate default weak lambda
             if (default_lambda == 'default'){
-                let later_dur_ratio = later_dur/original_dur;
-                if (later_dur_ratio>=0.7){
-                    var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(1-later_dur_ratio,2);
-                }
-                else{
-                    var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(later_dur_ratio,0.3)
-                }
+                var weak_lambda = modified_data.Lambda[long_idx[s]]*Math.pow(later_dur/original_dur,0.9/order);
             }
             else{
                 var weak_lambda = parseFloat(default_lambda);
