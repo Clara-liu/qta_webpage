@@ -86,7 +86,7 @@ function qta(target_data, initial_data) {
                 }
                 // declare coefficients using variable name in Prom-on's c code
                 let c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0, c11 = 0, c12 = 0, c13 = 0, c14 = 0, c15 = 0;
-                c1 = start_pitch - height;
+                c1 = f0_pre - height;
                 c2 = c1 * lam - slope;
                 if (order>2){
                     c3 = ci[2];
